@@ -15,10 +15,6 @@ API_URL = "https://berlin-hotel-esg-intelligence-fastapi.onrender.com"
 @st.cache_data
 def load_hotels():
     
-if df.empty:
-    st.error("No hotel data loaded from the backend API. Please refresh the app or wait for the Render backend to wake up.")
-    st.stop()
-    
     try:
 
         response = requests.get(
@@ -46,6 +42,12 @@ if df.empty:
 
 df = load_hotels()
 
+if df.empty:
+    st.error(
+        "No hotel data loaded from the backend API. "
+        "Please refresh the app or wait for the Render backend to wake up."
+    )
+    st.stop()
 st.title(" Berlin Hotel ESG Intelligence Dashboard")
 st.write(
     "AI-powered geospatial ESG, carbon, trust-risk and hotel recommendation dashboard for Berlin hotels."
