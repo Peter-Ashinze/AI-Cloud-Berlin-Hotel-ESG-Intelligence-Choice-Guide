@@ -14,7 +14,11 @@ API_URL = "https://berlin-hotel-esg-intelligence-fastapi.onrender.com"
 
 @st.cache_data
 def load_hotels():
-
+    
+if df.empty:
+    st.error("No hotel data loaded from the backend API. Please refresh the app or wait for the Render backend to wake up.")
+    st.stop()
+    
     try:
 
         response = requests.get(
